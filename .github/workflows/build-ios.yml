@@ -17,13 +17,16 @@ jobs:
           flutter-version: "3.22.0"
 
       - name: Get dependencies
+        working-directory: simple_live_app
         run: flutter pub get
 
       - name: Build iOS (no codesign)
+        working-directory: simple_live_app
         run: |
           flutter build ios --release --no-codesign
 
       - name: Package IPA
+        working-directory: simple_live_app
         run: |
           cd build/ios/iphoneos
           mkdir Payload
@@ -34,4 +37,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: simple_live_unsigned
-          path: build/ios/iphoneos/simple_live_unsigned.ipa
+          path: simple_live_app/build/ios/iphoneos/simple_live_unsigned.ipa
